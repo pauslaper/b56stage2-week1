@@ -270,6 +270,7 @@ export function PostCard() {
                           src={thread.image}
                           width={"400px"}
                           height={"300px"}
+                          objectFit={"contain"}
                         />
                       )}
                       <Flex mb="10px" mt="10px" color="gray.500" fontSize="sm">

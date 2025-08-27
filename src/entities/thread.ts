@@ -11,7 +11,7 @@ export interface ThreadEntity {
   createdAt: Date;
   updatedAt: Date;
 
-  replies?: ReplyEntity[]; 
+  replies?: ReplyEntity[];
 
   likes?: likeEntity[];
 }

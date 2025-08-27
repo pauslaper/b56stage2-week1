@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { CreatePost, LeftBar } from "../components/left-bar";
-import { RightBar } from "../components/right-bar";
 import { useLocation } from "react-router-dom";
+import { CreatePost } from "../components/create-post";
 import { EditProfile } from "../components/edit-profile";
+import { LeftBar } from "../components/left-bar";
+import { RightBar } from "../components/right-bar";
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const [showCreatePost, setShowCreatePost] = useState(false);

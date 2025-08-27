@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiV1 } from "../libs/api"; 
+import { apiV1 } from "../libs/api";
 import Cookies from "js-cookie";
 
-// Define the state interface for follow
 interface FollowState {
   following: any[];
   followers: any[];
@@ -10,7 +9,6 @@ interface FollowState {
   error: string | null;
 }
 
-// Initial state for follows
 const initialState: FollowState = {
   following: [],
   followers: [],
@@ -18,7 +16,6 @@ const initialState: FollowState = {
   error: null,
 };
 
-// Async thunk to follow a user
 export const followUser = createAsyncThunk(
   "follows/followUser",
   async (followedId: number, { rejectWithValue }) => {
@@ -42,7 +39,6 @@ export const followUser = createAsyncThunk(
   }
 );
 
-// Async thunk to unfollow a user
 export const unfollowUser = createAsyncThunk(
   "follows/unfollowUser",
   async (followedId: number, { rejectWithValue }) => {
@@ -65,7 +61,6 @@ export const unfollowUser = createAsyncThunk(
   }
 );
 
-// Async thunk to fetch users the current user is following
 export const fetchFollowing = createAsyncThunk(
   "follows/fetchFollowing",
   async (_, { rejectWithValue }) => {
@@ -84,7 +79,6 @@ export const fetchFollowing = createAsyncThunk(
   }
 );
 
-// Async thunk to fetch followers of the current user
 export const fetchFollowers = createAsyncThunk(
   "follows/fetchFollowers",
   async (_, { rejectWithValue }) => {
@@ -103,7 +97,6 @@ export const fetchFollowers = createAsyncThunk(
   }
 );
 
-// Create a slice for follow actions
 const followSlice = createSlice({
   name: "follows",
   initialState,
@@ -118,17 +111,8 @@ const followSlice = createSlice({
         state.loading = false;
         const followedUser = action.payload.userId;
 
-        // Add the user to followers if not already in the list
-        if (!state.followers.some((follower) => follower.follower.id === followedUser)) {
-          state.followers.push({
-            follower: { id: followedUser, ...action.payload }, // Assuming API returns full user data
-            isFollowing: true,
-          });
-        }
-
-        // Add the user to following if not already in the list
         if (!state.following.some((f) => f.followedId === followedUser)) {
-          state.following.push({ followedId: followedUser });
+          state.following.push({ followedId: followedUser, isFollowing: true });
         }
       })
       .addCase(followUser.rejected, (state, action) => {

@@ -217,7 +217,7 @@ export function Following() {
                 fontSize="12px"
                 color="gray.500"
               >
-                @ {followingUser.username}
+                @{followingUser.username}
               </Text>
               <Text
                 mb={"5px"}
